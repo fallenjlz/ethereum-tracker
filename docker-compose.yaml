@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+  app:
+    build: .
+    ports:
+      - "8080:8080"
+    networks:
+      - erc
+
+  grafana-agent:
+    image: grafana/agent:v0.38.1
+    volumes:
+      - ./agent.yaml:/etc/agent/agent.yaml
+    networks:
+      - erc
+
+networks:
+  erc:
+    driver: bridge
